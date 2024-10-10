@@ -4,7 +4,7 @@ export const Quiz: Type[] = [
     {
         Id: 1,
         Question: '1. Qual ingrediente não pode faltar?',
-        TrueResponse: 'Farinha',
+        TrueResponse: 0,
         Response: [
             'Farinha',
             'Corante',
@@ -15,7 +15,7 @@ export const Quiz: Type[] = [
     {
         Id: 2,
         Question: '2. Qual ingrediente não é usado para fazer escondidindo?',
-        TrueResponse: 'Leite condensado',
+        TrueResponse: 3,
         Response: [
             'Carne seca',
             'Creme de leite',
@@ -26,7 +26,7 @@ export const Quiz: Type[] = [
     {
         Id: 3,
         Question: '3. Qual receita fica pronta mais rápido?',
-        TrueResponse: 'Ovo frito',
+        TrueResponse: 2,
         Response: [
             'Bolo',
             'Pudim',
@@ -37,7 +37,7 @@ export const Quiz: Type[] = [
     {
         Id: 4,
         Question: '4. Qual ingrediente pode ser usado para fazer maionese?',
-        TrueResponse: 'Óleo',
+        TrueResponse: 1,
         Response: [
             'Limão',
             'Óleo',

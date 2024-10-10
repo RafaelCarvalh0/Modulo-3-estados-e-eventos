@@ -4,7 +4,7 @@ import { ReactNode, useState } from "react"
 
 type Props = {
     id: number;
-    index: number;
+    key: number;
     isCorrectResponse: boolean;
 }
 
@@ -13,25 +13,16 @@ export const useHome = () => {
     const [selectedResponse, setselectedResponse] = useState<Props | null>(null);
     const [score, setScore] = useState<number>(0);
     const [percentage, setPercentage] = useState<number>(0);
+    const [showResult, setShowResult] = useState<boolean>(false);
 
-    const handleSubmit = (quiz: Quiz[], selectedResponse: ReactNode, index: number) => {
+    const handleSubmit = (quiz: Quiz[], key: number) => {
 
-        setTimeout(() => {
-            if (page === quiz.length - 1) {
-                setPage(0);
-                setScore(0);
-                setPercentage(0);
-            }
-            else
-                setPage(page + 1)
+        if (selectedResponse !== null) return;
 
-            setselectedResponse(null)
-        }, 2000);
-
-        if (selectedResponse === quiz[page].TrueResponse) {
+        else if (key === quiz[page].TrueResponse) {
             setselectedResponse({
                 id: quiz[page].Id,
-                index: index,
+                key: key,
                 isCorrectResponse: true
             });
             setScore(prevScore => prevScore + 1)
@@ -41,18 +32,38 @@ export const useHome = () => {
         else {
             setselectedResponse({
                 id: quiz[page].Id,
-                index: index,
+                key: key,
                 isCorrectResponse: false
             });
             //setScore((score + 0) / quiz.length * 100)
         }
     }
 
+    const handleNextQuestion = () => {
+
+        if (page === quiz.length - 1)
+            setShowResult(true);
+        else
+            setPage(page + 1)
+
+        setselectedResponse(null)
+    }
+
+    const handleRestartQuiz = () => {
+        setPage(0);
+        setScore(0);
+        setPercentage(0);
+        setShowResult(false);
+    }
+
     return {
         page,
         quiz,
         handleSubmit,
+        handleRestartQuiz,
         selectedResponse,
-        percentage
+        percentage,
+        handleNextQuestion,
+        showResult
     }
 }
